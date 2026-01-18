@@ -111,7 +111,7 @@ export default function BossStage() {
                   initial={{ opacity: 1 }}
                   animate={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute inset-0 bg-white z-0"
+                  className="absolute inset-0 bg-white z-0 pointer-events-none"
                 />
 
                 {/* Eyes Expression (Simple) */}
@@ -153,7 +153,7 @@ export default function BossStage() {
 
         {gameState === "intro" && (
           <div className="text-center">
-            <h1 className="text-5xl font-black mb-4 text-red-500 uppercase">
+            <h1 className="text-5xl font-black mb-4 text-red-500 uppercase drop-shadow-lg">
               BOSS RUSH
             </h1>
             <p className="mb-8 text-gray-300">
@@ -171,7 +171,7 @@ export default function BossStage() {
         {gameState === "won" && (
           <div className="text-center bg-black/80 p-8 rounded-xl border-4 border-green-500">
             <h1 className="text-4xl font-bold text-green-400 mb-2">VICTORY!</h1>
-            <p className="mb-6">+10 Tokens</p>
+            <p className="mb-6">+1 Tokens</p>
             <Button onClick={() => router.push("/game")} variant="secondary">
               Kembali ke Menu
             </Button>

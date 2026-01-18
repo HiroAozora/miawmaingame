@@ -135,8 +135,8 @@ export default function GameHub() {
         </div>
       </main>
 
-      {/* Bottom Bar (Gacha) */}
-      <div className="fixed bottom-0 w-full max-w-md p-4 bg-white/90 backdrop-blur-sm border-t-2 border-black">
+      {/* Bottom Bar (Gacha & Settings) */}
+      <div className="sticky bottom-0 w-full max-w-md p-4 bg-white/90 backdrop-blur-sm border-t-2 border-black flex flex-col gap-2 z-20">
         {useGameStore.getState().completedStages.includes("boss") ? (
           <Button
             className="w-full flex gap-2 items-center justify-center bg-purple-500 text-white animate-pulse"
@@ -156,6 +156,18 @@ export default function GameHub() {
             </span>
           </Button>
         )}
+
+        <button
+          onClick={() => {
+            if (confirm("Ulang dari awal? Progress akan hilang!")) {
+              useGameStore.getState().resetProgress();
+              router.push("/");
+            }
+          }}
+          className="text-xs text-center text-gray-400 hover:text-red-500 underline py-1"
+        >
+          Reset Progress (Ulang)
+        </button>
       </div>
     </div>
   );
