@@ -44,6 +44,7 @@ export default function GameHub() {
   const router = useRouter();
   const { playerName, tokens, unlockedStages } = useGameStore();
   const [isClient, setIsClient] = useState(false);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -53,8 +54,6 @@ export default function GameHub() {
   }, [playerName, router]);
 
   if (!isClient) return null;
-
-  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col max-w-md mx-auto border-x-2 border-gray-200 relative">
