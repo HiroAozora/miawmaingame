@@ -85,7 +85,7 @@ export default function MemoryStage() {
         if (round >= WIN_ROUND) {
           setGameState("won");
           completeStage("memory");
-          addToken(5);
+          addToken(1);
         } else {
           setMessage("Bagus!");
           setTimeout(() => {

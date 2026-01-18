@@ -15,12 +15,6 @@ const stages: {
   color: string;
 }[] = [
   {
-    id: "boss",
-    name: "Boss Survival",
-    icon: <Skull size={32} />,
-    color: "bg-red-400",
-  },
-  {
     id: "timing",
     name: "Ketuk Tepat",
     icon: <Zap size={32} />,
@@ -38,6 +32,12 @@ const stages: {
     icon: <Hand size={32} />,
     color: "bg-green-400",
   },
+  {
+    id: "boss",
+    name: "Boss Survival",
+    icon: <Skull size={32} />,
+    color: "bg-red-400",
+  },
 ];
 
 export default function GameHub() {
@@ -54,10 +54,12 @@ export default function GameHub() {
 
   if (!isClient) return null;
 
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col max-w-md mx-auto border-x-2 border-gray-200">
+    <div className="min-h-screen bg-gray-50 flex flex-col max-w-md mx-auto border-x-2 border-gray-200 relative">
       {/* Top Bar */}
-      <header className="p-4 flex justify-between items-center bg-white border-b-2 border-black sticky top-0 z-10 shadow-sm">
+      <header className="p-4 flex justify-between items-center bg-white border-b-2 border-black sticky top-0 z-30 shadow-sm">
         <div className="flex flex-col">
           <span className="text-xs text-gray-500 font-bold uppercase">
             Player
@@ -72,22 +74,16 @@ export default function GameHub() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 p-4 overflow-y-auto pb-24">
+      {/* Main Content - Removing overflow-y-auto restricted height to allow body scroll naturally on mobile if needed, or keeping it but ensuring height calc is safe */}
+      <main className="flex-1 p-4 pb-32">
         <h2 className="text-2xl font-black mb-6 uppercase">Pilih Tantangan</h2>
 
         <div className="grid grid-cols-1 gap-4">
           {stages.map((stage, index) => {
-            const isUnlocked =
-              unlockedStages.includes(stage.id) ||
-              unlockedStages.includes("boss"); // Fallback logic check
-            // Actually, best to just check includes directly.
-            // Warning: The unlockedStages array in store is what matters.
-
-            // Correct logic accessing state directly in component render
-            const locked = !useGameStore
-              .getState()
-              .unlockedStages.includes(stage.id);
+            const unlockedList = useGameStore.getState().unlockedStages;
+            // Timing is always unlocked if strictly sequential foundation is respected
+            // But let's stick to store logic.
+            const locked = !unlockedList.includes(stage.id);
 
             return (
               <motion.div
@@ -136,7 +132,7 @@ export default function GameHub() {
       </main>
 
       {/* Bottom Bar (Gacha & Settings) */}
-      <div className="sticky bottom-0 w-full max-w-md p-4 bg-white/90 backdrop-blur-sm border-t-2 border-black flex flex-col gap-2 z-20">
+      <div className="fixed bottom-0 w-full max-w-md p-4 bg-white/90 backdrop-blur-sm border-t-2 border-black flex flex-col gap-2 z-20">
         {useGameStore.getState().completedStages.includes("boss") ? (
           <Button
             className="w-full flex gap-2 items-center justify-center bg-purple-500 text-white animate-pulse"
@@ -158,17 +154,48 @@ export default function GameHub() {
         )}
 
         <button
-          onClick={() => {
-            if (confirm("Ulang dari awal? Progress akan hilang!")) {
-              useGameStore.getState().resetProgress();
-              router.push("/");
-            }
-          }}
+          onClick={() => setShowResetConfirm(true)}
           className="text-xs text-center text-gray-400 hover:text-red-500 underline py-1"
         >
           Reset Progress (Ulang)
         </button>
       </div>
+
+      {/* Reset Confirmation Modal */}
+      {showResetConfirm && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-white border-4 border-black p-6 rounded-xl max-w-xs w-full text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+          >
+            <h3 className="text-xl font-black mb-2 uppercase text-red-500">
+              Yakin Reset?
+            </h3>
+            <p className="text-gray-600 mb-6 font-medium">
+              Semua progress & token akan hilang selamanya!
+            </p>
+            <div className="flex gap-4">
+              <Button
+                variant="ghost"
+                onClick={() => setShowResetConfirm(false)}
+                className="flex-1"
+              >
+                Batal
+              </Button>
+              <Button
+                onClick={() => {
+                  useGameStore.getState().resetProgress();
+                  router.push("/");
+                }}
+                className="flex-1 bg-red-500 text-white border-red-700 hover:bg-red-600"
+              >
+                Reset
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }

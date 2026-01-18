@@ -111,7 +111,7 @@ export default function BossStage() {
                   initial={{ opacity: 1 }}
                   animate={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute inset-0 bg-white z-0 pointer-events-none"
+                  className="absolute inset-0 bg-white z-0 pointer-events-none rounded-full"
                 />
 
                 {/* Eyes Expression (Simple) */}

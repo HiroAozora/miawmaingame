@@ -21,7 +21,9 @@ export default function TimingStage() {
   const directionRef = useRef(1);
   const speedRef = useRef(0.8); // Slower initial speed
 
-  const [feedback, setFeedback] = useState<"hit" | "miss" | null>(null);
+  const [feedback, setFeedback] = useState<
+    "hit" | "miss" | "STAGE COMPLETE!" | null
+  >(null);
 
   const requestRef = useRef<number | null>(null);
 
@@ -77,9 +79,13 @@ export default function TimingStage() {
 
       if (newScore >= 5) {
         setIsPlaying(false);
+        setFeedback("STAGE COMPLETE!"); // Updated feedback
         completeStage("timing");
         addToken(1);
+        // Alert handled via feedback text rendering below, no native alert needed if UI is clear
         setTimeout(() => router.push("/game"), 2000);
+      } else {
+        setTimeout(() => setFeedback(null), 500);
       }
     } else {
       // Miss
@@ -132,6 +138,18 @@ export default function TimingStage() {
             MISS!
           </motion.span>
         )}
+        {feedback === "STAGE COMPLETE!" && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-white z-50 rounded-xl"
+          >
+            <h2 className="text-4xl font-black text-yellow-500 mb-2">
+              SELESAI!
+            </h2>
+            <p className="text-2xl font-bold">+1 TOKEN</p>
+          </motion.div>
+        )}
       </div>
 
       {/* Bar Container */}
@@ -153,12 +171,10 @@ export default function TimingStage() {
         {isPlaying ? "TAP saat di area hijau!" : "Tap layar untuk mulai"}
       </p>
 
-      {score >= 10 && (
-        <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-white z-50">
-          <h2 className="text-5xl font-black text-yellow-400 mb-4">SELESAI!</h2>
-          <p>+5 Tokens</p>
-        </div>
-      )}
+      {/* Legacy Overlay fallback (optional, but removing to avoid dupes) 
+          Actually let's remove the old overlay block at consistent line numbers
+          The replacement above handles the completion feedback inline
+      */}
 
       <div className="absolute top-4 left-4 z-20">
         <Button
