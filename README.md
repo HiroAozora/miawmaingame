@@ -1,56 +1,78 @@
-# MiawMainGame 🐱🎮
+# Miaw Main Game
 
-A lightweight, mobile-first web game collection built with Next.js 15, Tailwind CSS, and Framer Motion.
+Selamat datang di **Miaw Main Game**! Sebuah koleksi mini-game web yang seru, interaktif, dan penuh tantangan untuk menguji ketangkasan serta ingatanmu. dibuat utk someone to code
 
-## 🌟 Features
+## 🎮 Fitur Utama
 
-- **4 Unique Stages**:
-  1.  **Ketuk Tepat** (Timing): Test your reflex accuracy.
-  2.  **Kisi Memori** (Memory): Simon Says style pattern memorization.
-  3.  **Tahan & Lepas** (Hold): Charge power to the perfect level (don't explode!).
-  4.  **Boss Survival**: Tap rapidly to defeat the boss in 15s (Shake & Flash effects included!).
-- **Progressive Unlock**: Complete stages sequentially to face the Boss.
-- **Economy System**: Earn 1 Token per stage win.
-- **Gacha System**: Spend Tokens to cycle through Zonk, Secret, and Mythic rewards (Reset every 5 pulls).
+- **Desain Responsif**: Tampilan optimal di semua perangkat, mulai dari HP layar kecil, tablet, hingga komputer desktop.
+- **Aesthetic Premium**: Desain visual yang cerah, imut, dan modern dengan animasi yang halus.
+- **Sistem Token**: Kumpulkan token dari setiap kemenangan untuk membuka hadiah spesial!
+- **Gacha System**: Tukarkan tokenmu dengan hadiah acak yang menarik.
+- **Dark Mode Free**: Tema terang yang konsisten dan ceria di segala kondisi.
 
-## 🛠️ Tech Stack
+## 🕹️ Daftar Permainan
 
-- **Framework**: Next.js 15 (App Router)
-- **Styling**: Tailwind CSS
-- **Animation**: Framer Motion
-- **State Management**: Zustand (Persisted locally)
-- **Icons**: Lucide React
+Game ini terdiri dari 4 stage utama yang harus diselesaikan secara berurutan:
 
-## 🚀 Getting Started
+1.  **⚡ Ketuk Tepat (Timing Stage)**
+    - **Misi**: Ketuk layar saat indikator berada tepat di area hijau.
+    - **Tantangan**: Semakin lama, indikator bergerak makin cepat & area hijau makin kecil!
+    - **Target**: Kumpulkan skor 5 poin berturut-turut.
 
-1.  **Clone the repo:**
+2.  **🧠 Kisi Memori (Memory Stage)**
+    - **Misi**: Ingat pola kotak yang menyala, lalu ulangi polanya.
+    - **Tantangan**: Pola akan semakin rumit di setiap ronde.
+    - **Target**: Selesaikan 4 ronde tanpa salah.
+
+3.  **🔋 Tahan & Lepas (Hold Stage)**
+    - **Misi**: Tahan tombol untuk mengisi tenaga, dan lepas tepat di zona target (+/- 15%).
+    - **Tantangan**: Jangan terlalu lama (meledak!) atau terlalu sebentar (gagal).
+    - **Target**: Lepaskan tepat di area kuning untuk menang.
+
+4.  **💀 Boss Survival**
+    - **Misi**: Kalahkan Boss dengan serangan cepat!
+    - **Tantangan**: Hindari serangan Boss dan serang balik saat ada celah.
+    - **Target**: Habiskan HP Boss sebelum waktu habis.
+
+## 🛠️ Teknologi
+
+Project ini dibangun menggunakan:
+
+- **Next.js 14** (App Router)
+- **React** & **TypeScript**
+- **Tailwind CSS** (Styling)
+- **Framer Motion** (Animasi)
+- **Zustand** (State Management)
+- **Lucide React** (Ikon)
+
+## 🚀 Cara Menjalankan (Local)
+
+1.  **Clone repository ini**:
 
     ```bash
-    git clone https://github.com/HiroAozora/miawmaingame.git
+    git clone https://github.com/hirosigam/miawmaingame.git
     cd miawmaingame
     ```
 
-2.  **Install dependencies:**
+2.  **Install dependencies**:
 
     ```bash
     npm install
     ```
 
-3.  **Run locally:**
+3.  **Jalankan server development**:
+
     ```bash
     npm run dev
     ```
-    Open `http://localhost:3000` (or your local IP for mobile testing).
 
-## 🌐 Deployment (Vercel)
+4.  Buka [http://localhost:3000](http://localhost:3000) di browser kamu.
 
-This project is optimized for Vercel.
+## 📱 Catatan Pengembang
 
-1.  Push this code to GitHub.
-2.  Go to [Vercel](https://vercel.com) -> **Add New Project**.
-3.  Import `miawmaingame` from your GitHub.
-4.  **Build Command**: Auto-detected (`next build`).
-5.  **Output Directory**: Auto-detected (`.next`).
-6.  Click **Deploy**!
+- **v1.0.0**: Rilis awal dengan 4 stage utama.
+- **Update Terakhir**: Perbaikan bug visual, penyesuaian kesulitan (Hold Stage lebih mudah), dan implementasi layout responsif tipe "App Shell" untuk kenyamanan maksimal di HP.
 
-> **Note**: No environment variables are required for the base game.
+---
+
+_Dibuat dengan neks ji es oleh [hirocintahdeadline]_
