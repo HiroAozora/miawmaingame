@@ -56,9 +56,9 @@ export default function GameHub() {
   if (!isClient) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col max-w-md mx-auto border-x-2 border-gray-200 relative">
-      {/* Top Bar */}
-      <header className="p-4 flex justify-between items-center bg-white border-b-2 border-black sticky top-0 z-30 shadow-sm">
+    <div className="h-[100dvh] bg-gray-50 flex flex-col max-w-md mx-auto border-x-2 border-gray-200 relative overflow-hidden">
+      {/* Top Bar - Static */}
+      <header className="flex-none p-4 flex justify-between items-center bg-white border-b-2 border-black z-30 shadow-sm">
         <div className="flex flex-col">
           <span className="text-xs text-gray-500 font-bold uppercase">
             Player
@@ -73,15 +73,13 @@ export default function GameHub() {
         </div>
       </header>
 
-      {/* Main Content - Removing overflow-y-auto restricted height to allow body scroll naturally on mobile if needed, or keeping it but ensuring height calc is safe */}
-      <main className="flex-1 p-4 pb-32">
+      {/* Main Content - Scrollable */}
+      <main className="flex-1 overflow-y-auto p-4 custom-scrollbar">
         <h2 className="text-2xl font-black mb-6 uppercase">Pilih Tantangan</h2>
 
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-4 pb-4">
           {stages.map((stage, index) => {
             const unlockedList = useGameStore.getState().unlockedStages;
-            // Timing is always unlocked if strictly sequential foundation is respected
-            // But let's stick to store logic.
             const locked = !unlockedList.includes(stage.id);
 
             return (
@@ -130,8 +128,8 @@ export default function GameHub() {
         </div>
       </main>
 
-      {/* Bottom Bar (Gacha & Settings) */}
-      <div className="fixed bottom-0 w-full max-w-md p-4 bg-white/90 backdrop-blur-sm border-t-2 border-black flex flex-col gap-2 z-20">
+      {/* Bottom Bar (Gacha & Settings) - Static */}
+      <div className="flex-none w-full p-4 bg-white/90 backdrop-blur-sm border-t-2 border-black flex flex-col gap-2 z-20">
         {useGameStore.getState().completedStages.includes("boss") ? (
           <Button
             className="w-full flex gap-2 items-center justify-center bg-purple-500 text-white animate-pulse"

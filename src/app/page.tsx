@@ -32,7 +32,7 @@ export default function Home() {
   if (!isClient) return null; // Prevent hydration mismatch
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-yellow-50 text-center overflow-hidden">
+    <main className="flex min-h-[100dvh] flex-col items-center justify-center p-6 bg-yellow-50 text-center overflow-y-auto">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
