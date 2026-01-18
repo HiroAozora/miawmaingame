@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 import { clsx } from "clsx";
 import { Battery, Zap } from "lucide-react";
+import StageCompletionModal from "./StageCompletionModal";
 
 export default function HoldStage() {
   const router = useRouter();
@@ -46,7 +47,7 @@ export default function HoldStage() {
   const isChargingRef = useRef(false);
 
   const updateCharge = () => {
-    powerRef.current += 0.5; // Nerfed speed (was 1.5)
+    powerRef.current += 0.4; // Nerfed speed (was 0.5)
     setPower(powerRef.current);
 
     if (powerRef.current >= 120) {
@@ -78,15 +79,15 @@ export default function HoldStage() {
   const handleRelease = (finalPower: number) => {
     if (requestRef.current) cancelAnimationFrame(requestRef.current);
     setGameState("result");
-    const lower = target - 5;
-    const upper = target + 5;
+    const lower = target - 15;
+    const upper = target + 15;
 
     if (finalPower > 100) {
       setResult("explode");
     } else if (finalPower >= lower && finalPower <= upper) {
       setResult("win");
       completeStage("hold");
-      addToken(5);
+      addToken(1);
     } else {
       setResult("fail");
     }
@@ -123,7 +124,7 @@ export default function HoldStage() {
         <Zap className="text-yellow-400" />
         Target:{" "}
         <span className="text-yellow-400">
-          {target - 5}% - {target + 5}%
+          {target - 15}% - {target + 15}%
         </span>
       </div>
 
@@ -132,7 +133,7 @@ export default function HoldStage() {
         {/* Target Zone */}
         <div
           className="absolute w-full bg-yellow-500/30 border-y-2 border-yellow-400 z-10"
-          style={{ bottom: `${target - 5}%`, height: `${10}%` }}
+          style={{ bottom: `${target - 15}%`, height: `${30}%` }}
         >
           <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-bold text-yellow-400">
             TARGET
@@ -205,18 +206,11 @@ export default function HoldStage() {
             )}
 
             {result === "win" ? (
-              <div>
-                <h2 className="text-4xl font-black text-yellow-400 mb-2">
-                  SEMPURNA!
-                </h2>
-                <p className="mb-4 text-green-300">+5 Token</p>
-                <Button
-                  onClick={() => router.push("/game")}
-                  className="bg-white text-green-900 font-bold"
-                >
-                  Lanjut
-                </Button>
-              </div>
+              <StageCompletionModal
+                isOpen={true}
+                title="SEMPURNA!"
+                rewardText="+1 Token"
+              />
             ) : result === "explode" ? (
               <div>
                 <h2 className="text-4xl font-black text-red-500 mb-2">

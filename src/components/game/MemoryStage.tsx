@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 import { clsx } from "clsx";
 import { Brain } from "lucide-react";
+import StageCompletionModal from "./StageCompletionModal";
 
 const GRID_SIZE = 9;
 const WIN_ROUND = 4; // Complete 3 sequences to win
@@ -162,20 +163,11 @@ export default function MemoryStage() {
         </div>
       )}
 
-      {gameState === "won" && (
-        <div className="absolute inset-0 bg-green-500/90 flex items-center justify-center z-20 text-white text-center">
-          <div>
-            <h2 className="text-4xl font-black mb-4">HEBAT!</h2>
-            <p className="mb-6 text-xl">+5 Token</p>
-            <Button
-              onClick={() => router.push("/game")}
-              className="bg-white text-black border-none"
-            >
-              Lanjut
-            </Button>
-          </div>
-        </div>
-      )}
+      <StageCompletionModal
+        isOpen={gameState === "won"}
+        title="MEMORI KUAT!"
+        rewardText="+1 Token"
+      />
     </div>
   );
 }

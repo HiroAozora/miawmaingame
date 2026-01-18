@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 import { Heart, Timer, Swords } from "lucide-react";
 import { clsx } from "clsx";
+import StageCompletionModal from "./StageCompletionModal";
 
 // Placeholder Lottie (replace with actual Boss asset later)
 const BOSS_LOTTIE_URL =
@@ -169,13 +170,11 @@ export default function BossStage() {
         )}
 
         {gameState === "won" && (
-          <div className="text-center bg-black/80 p-8 rounded-xl border-4 border-green-500">
-            <h1 className="text-4xl font-bold text-green-400 mb-2">VICTORY!</h1>
-            <p className="mb-6">+1 Tokens</p>
-            <Button onClick={() => router.push("/game")} variant="secondary">
-              Kembali ke Menu
-            </Button>
-          </div>
+          <StageCompletionModal
+            isOpen={true}
+            title="VICTORY!"
+            rewardText="+1 Token"
+          />
         )}
 
         {gameState === "lost" && (

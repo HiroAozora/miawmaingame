@@ -7,13 +7,6 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   color: var(--foreground);
   background: var(--background);
@@ -24,11 +17,4 @@ body {
   /* CUTE PATTERN: Polka Dots */
   background-image: radial-gradient(#e5e7eb 2px, transparent 2px);
   background-size: 24px 24px;
-}
-
-/* Dark mode pattern adjustment */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-image: radial-gradient(#333 2px, transparent 2px);
-  }
 }
