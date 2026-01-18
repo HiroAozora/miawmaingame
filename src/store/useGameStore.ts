@@ -86,6 +86,7 @@ export const useGameStore = create<GameState>()(
     }),
     {
       name: "miaw-game-storage",
+      version: 1, // Increment version to invalidate old mismatching storage
     },
   ),
 );
