@@ -42,7 +42,7 @@ export default function Home() {
         <h1 className="text-4xl font-black mb-2 uppercase tracking-tighter">
           Miaw Main Game
         </h1>
-        <p className="text-lg mb-8 font-medium">Selamat datang, Penantang!</p>
+        <p className="text-lg mb-8 font-medium">Selamat datang!</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="text-left">
@@ -51,7 +51,7 @@ export default function Home() {
             </label>
             <Input
               id="name"
-              placeholder="Masukkan nama keren..."
+              placeholder="Masukkan nama kamuu..."
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="text-lg"
@@ -64,13 +64,13 @@ export default function Home() {
             className="w-full text-xl py-6"
             disabled={!name.trim()}
           >
-            Mulai Petualangan!
+            Gas mulai!
           </Button>
         </form>
       </motion.div>
 
       <div className="absolute bottom-4 text-xs font-bold text-gray-400">
-        v1.0.0 • Mobile First Experience
+        v1.0.0 • buat samwantukod
       </div>
     </main>
   );

@@ -38,7 +38,7 @@ Game ini terdiri dari 4 stage utama yang harus diselesaikan secara berurutan:
 
 Project ini dibangun menggunakan:
 
-- **Next.js 14** (App Router)
+- **Next.js 16** (App Router)
 - **React** & **TypeScript**
 - **Tailwind CSS** (Styling)
 - **Framer Motion** (Animasi)
@@ -75,4 +75,4 @@ Project ini dibangun menggunakan:
 
 ---
 
-_Dibuat dengan neks ji es oleh [hirocintahdeadline]_
+_Dibuat dengan neks ji es oleh hirocintahdeadline_
