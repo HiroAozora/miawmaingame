@@ -200,8 +200,15 @@ export default function GachaPage() {
               <p className="text-lg font-bold mb-6 relative z-10">
                 {reward.sub}
               </p>
-              <Button onClick={closeReward} className="w-full relative z-20">
-                OK
+              <Button
+                onClick={closeReward}
+                className={clsx(
+                  "w-full relative z-20",
+                  reward.type === "mythic" &&
+                    "bg-emerald-400 hover:bg-emerald-500 text-black font-bold",
+                )}
+              >
+                {reward.type === "mythic" ? "Terima Hadiah" : "OK"}
               </Button>
             </motion.div>
           )}
