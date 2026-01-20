@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGameStore } from "@/store/useGameStore";
 import { Button } from "@/components/ui/Button";
@@ -57,9 +58,9 @@ export default function GachaPage() {
           result = {
             type: "mythic",
             message: "MYTHIC GET!",
-            sub: "Pedang Ikan Legendaris",
+            sub: "Kamera buat Hiu Kecil",
           };
-          addToInventory("Pedang Ikan Legendaris");
+          addToInventory("Kamera buat Hiu Kecil");
         } else {
           // Fallback
           result = { type: "zonk", message: "HITUNGAN SALAH?", sub: "Bug..." };
@@ -130,7 +131,7 @@ export default function GachaPage() {
               className={clsx(
                 "p-8 rounded-xl border-4 shadow-2xl max-w-sm w-full relative overflow-hidden",
                 reward.type === "mythic"
-                  ? "bg-red-900 border-red-500 text-white"
+                  ? "bg-emerald-900 border-emerald-400 text-white shadow-[0_0_60px_rgba(52,211,153,0.6)]"
                   : reward.type === "secret"
                     ? "bg-purple-900 border-purple-500 text-white"
                     : "bg-white border-black text-black",
@@ -138,15 +139,27 @@ export default function GachaPage() {
             >
               {/* Visual Effects Background */}
               {reward.type === "mythic" && (
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] opacity-20 pointer-events-none"
-                />
+                <>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_340deg,rgba(255,255,255,0.5)_360deg)] opacity-40 pointer-events-none"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-teal-900/50 pointer-events-none" />
+                  <motion.div
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                    }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 pointer-events-none"
+                  />
+                </>
               )}
               {reward.type === "secret" && (
                 <motion.div
@@ -163,11 +176,27 @@ export default function GachaPage() {
                     ? "text-gray-500"
                     : reward.type === "secret"
                       ? "text-yellow-300 drop-shadow-md"
-                      : "text-red-500 drop-shadow-[0_2px_0_#fff]",
+                      : "text-emerald-400 drop-shadow-[0_2px_0_#fff]",
                 )}
               >
                 {reward.message}
               </h2>
+
+              {reward.type === "mythic" && (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="relative w-48 h-48 mx-auto mb-4"
+                >
+                  <Image
+                    src="/prizes/hadiah hiu kecil.png"
+                    alt="Hadiah Hiu Kecil"
+                    fill
+                    className="object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
+                  />
+                </motion.div>
+              )}
+
               <p className="text-lg font-bold mb-6 relative z-10">
                 {reward.sub}
               </p>
